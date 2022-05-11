@@ -432,7 +432,17 @@ config FPU
 
 	  If you don't know what to do here, say Y.
 
-endmenu # "Platform type"
+config VECTOR
+	bool "VECTOR support"
+	depends on GCC_VERSION >= 120000 || CLANG_VERSION >= 130000
+	default n
+	help
+	  Say N here if you want to disable all vector related procedure
+	  in the kernel.
+
+	  If you don't know what to do here, say Y.
+
+endmenu
 
 menu "Kernel features"
 
@@ -556,6 +566,7 @@ config CMDLINE_EXTEND
 	  cases where the provided arguments are insufficient and
 	  you don't want to or cannot modify them.
 
+
 config CMDLINE_FORCE
 	bool "Always use the default kernel command string"
 	help
@@ -648,7 +659,7 @@ config XIP_PHYS_ADDR
 	  be linked for and stored to.  This address is dependent on your
 	  own flash usage.
 
-endmenu # "Boot options"
+endmenu
 
 config BUILTIN_DTB
 	bool
