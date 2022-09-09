@@ -75,6 +75,14 @@ void asm_offsets(void)
 	OFFSET(TSK_STACK_CANARY, task_struct, stack_canary);
 #endif
 
+	OFFSET(RISCV_V_STATE_MAGIC, __riscv_ctx_hdr, magic);
+	OFFSET(RISCV_V_STATE_SIZE, __riscv_ctx_hdr, size);
+	OFFSET(RISCV_V_STATE_VSTART, __riscv_v_state, vstart);
+	OFFSET(RISCV_V_STATE_VL, __riscv_v_state, vl);
+	OFFSET(RISCV_V_STATE_VTYPE, __riscv_v_state, vtype);
+	OFFSET(RISCV_V_STATE_VCSR, __riscv_v_state, vcsr);
+	OFFSET(RISCV_V_STATE_DATAP, __riscv_v_state, datap);
+
 	DEFINE(PT_SIZE, sizeof(struct pt_regs));
 	OFFSET(PT_EPC, pt_regs, epc);
 	OFFSET(PT_RA, pt_regs, ra);
@@ -270,6 +278,13 @@ void asm_offsets(void)
 	OFFSET(KVM_ARCH_FP_D_F31, kvm_cpu_context, fp.d.f[31]);
 	OFFSET(KVM_ARCH_FP_D_FCSR, kvm_cpu_context, fp.d.fcsr);
 
+	/* V extension */
+
+	OFFSET(KVM_ARCH_VECTOR_VSTART, kvm_cpu_context, vector.vstart);
+	OFFSET(KVM_ARCH_VECTOR_VL, kvm_cpu_context, vector.vl);
+	OFFSET(KVM_ARCH_VECTOR_VTYPE, kvm_cpu_context, vector.vtype);
+	OFFSET(KVM_ARCH_VECTOR_VCSR, kvm_cpu_context, vector.vcsr);
+	OFFSET(KVM_ARCH_VECTOR_DATAP, kvm_cpu_context, vector.datap);
 	/*
 	 * THREAD_{F,X}* might be larger than a S-type offset can handle, but
 	 * these are used in performance-sensitive assembly so we can't resort
